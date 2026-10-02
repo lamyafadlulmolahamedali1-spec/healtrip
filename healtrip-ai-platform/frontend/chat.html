@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI health assistant — HealTrip</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="config.js"></script>
+<script src="assets/js/client.js" defer></script>
+<script src="assets/js/core.js" defer></script>
+<script src="assets/js/chat.js" defer></script></head>
+<body>
+<a class="skip" href="#main" data-en="Skip to content" data-ar="تخطي إلى المحتوى">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark" aria-hidden="true">H</span>
+      <span><b>HealTrip</b><span data-en="Health navigation" data-ar="دليلك إلى الرعاية">Health navigation</span></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a href="about.html" data-en="About" data-ar="من نحن">About</a>
+      <a href="how-it-works.html" data-en="How it works" data-ar="كيف يعمل">How it works</a>
+      <a href="assessment.html" data-en="Assessment" data-ar="التقييم الصحي">Assessment</a>
+      <a href="chat.html" data-en="AI Assistant" data-ar="المساعد الصحي">AI Assistant</a>
+      <a href="patient.html" data-en="My Profile" data-ar="ملفي الصحي">My Profile</a>
+      <a href="network.html" data-en="Doctors" data-ar="الأطباء">Doctors</a>
+      <a href="hospitals.html" data-en="Hospitals" data-ar="المستشفيات">Hospitals</a>
+    </nav>
+    <button class="lang" type="button">العربية</button>
+    <button class="menu-btn" type="button" aria-label="Menu">≡</button>
+  </div>
+</header>
+
+<main id="main">
+<section style="padding-bottom:1.4rem">
+  <div class="wrap">
+    <p class="eyebrow" data-en="AI health assistant" data-ar="المساعد الصحي">AI health assistant</p>
+    <h1 class="display" style="font-size:clamp(1.9rem,4vw,2.8rem)" data-en="Have a conversation about your health" data-ar="تحدثي عن صحتك">Have a conversation about your health</h1>
+    <p class="lede" style="margin-top:1rem" data-en="Ask what a word in a report means, organise what you want to say, or prepare questions for your appointment. For symptoms, the assessment is the better place, because it asks the questions that matter and checks for anything urgent." data-ar="اسألي عن معنى مصطلح في تقرير، أو نظّمي ما تودين قوله، أو جهّزي أسئلة لموعدك. أما للأعراض فالتقييم هو المكان الأنسب، لأنه يطرح الأسئلة المهمة ويفحص أي علامة عاجلة.">Ask what a word in a report means, organise what you want to say, or prepare questions for your appointment.</p>
+  </div>
+</section>
+
+<div class="wrap" style="padding-bottom:3rem">
+  <div class="card" id="login" style="max-width:460px;margin-bottom:2rem">
+    <h3 data-en="Sign in to keep your conversations" data-ar="سجّلي الدخول لحفظ محادثاتك">Sign in to keep your conversations</h3>
+    <label class="lbl" for="email" data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+    <input class="field" id="email" type="email" autocomplete="email" style="margin-bottom:.8rem">
+    <label class="lbl" for="password" data-en="Password, at least 10 characters" data-ar="كلمة المرور، 10 أحرف على الأقل">Password, at least 10 characters</label>
+    <input class="field" id="password" type="password" autocomplete="current-password" style="margin-bottom:1rem">
+    <div class="row">
+      <button class="btn btn-primary" id="signin" type="button" data-en="Sign in" data-ar="دخول">Sign in</button>
+      <button class="btn btn-ghost" id="register" type="button" data-en="Create account" data-ar="إنشاء حساب">Create account</button>
+    </div>
+  </div>
+
+  <div class="chatbox" id="chatbox" style="display:none">
+    <div class="messages" id="messages"></div>
+    <form class="composer-bar" id="chat-form">
+      <input class="field" id="message" data-en="Ask a question about your health" data-ar="اسألي سؤالًا عن صحتك" placeholder="Ask a question about your health" autocomplete="off">
+      <button class="btn btn-primary" type="submit" data-en="Send" data-ar="إرسال">Send</button>
+    </form>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:.8rem">
+        <span class="mark" aria-hidden="true">H</span><span><b>HealTrip</b></span>
+      </a>
+      <p data-en="HealTrip helps you understand your symptoms, prepare for a medical visit, and find appropriate care. It provides health information and navigation support, and does not replace professional medical care." data-ar="يساعدك HealTrip على فهم أعراضك والاستعداد للزيارة الطبية والوصول إلى الرعاية المناسبة. وهو يقدم معلومات صحية ودعمًا في التوجيه، ولا يحل محل الرعاية الطبية المتخصصة.">HealTrip helps you understand your symptoms, prepare for a medical visit, and find appropriate care.</p>
+    </div>
+    <div>
+      <h3 data-en="HealTrip" data-ar="HealTrip">HealTrip</h3>
+      <a href="about.html" data-en="About" data-ar="من نحن">About</a>
+      <a href="how-it-works.html" data-en="How it works" data-ar="كيف يعمل">How it works</a>
+      <a href="how-it-works.html#faq" data-en="Questions" data-ar="أسئلة شائعة">Questions</a>
+    </div>
+    <div>
+      <h3 data-en="Use HealTrip" data-ar="استخدمي HealTrip">Use HealTrip</h3>
+      <a href="assessment.html" data-en="Assessment" data-ar="التقييم الصحي">Assessment</a>
+      <a href="chat.html" data-en="AI Assistant" data-ar="المساعد الصحي">AI Assistant</a>
+      <a href="patient.html" data-en="My Profile" data-ar="ملفي الصحي">My Profile</a>
+    </div>
+    <div>
+      <h3 data-en="Find care" data-ar="البحث عن الرعاية">Find care</h3>
+      <a href="network.html" data-en="Doctors" data-ar="الأطباء">Doctors</a>
+      <a href="hospitals.html" data-en="Hospitals" data-ar="المستشفيات">Hospitals</a>
+      <a href="about.html#privacy" data-en="Your information" data-ar="معلوماتك">Your information</a>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <span data-en="HealTrip does not diagnose, does not prescribe, and does not replace a healthcare professional. What you enter stays in your session or your profile and can be deleted at any time." data-ar="HealTrip لا يشخّص ولا يصف علاجًا ولا يحل محل الطبيب. وما تدخلينه يبقى في جلستك أو ملفك ويمكن حذفه في أي وقت.">HealTrip does not diagnose, does not prescribe, and does not replace a healthcare professional.</span>
+    <a href="technical.html" class="dev-link" data-en="Technical console" data-ar="لوحة المطوّر">Technical console</a>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My profile — HealTrip</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="config.js"></script>
+<script src="assets/js/client.js" defer></script>
+<script src="assets/js/core.js" defer></script>
+<script src="assets/js/patient.js" defer></script></head>
+<body>
+<a class="skip" href="#main" data-en="Skip to content" data-ar="تخطي إلى المحتوى">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark" aria-hidden="true">H</span>
+      <span><b>HealTrip</b><span data-en="Health navigation" data-ar="دليلك إلى الرعاية">Health navigation</span></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a href="about.html" data-en="About" data-ar="من نحن">About</a>
+      <a href="how-it-works.html" data-en="How it works" data-ar="كيف يعمل">How it works</a>
+      <a href="assessment.html" data-en="Assessment" data-ar="التقييم الصحي">Assessment</a>
+      <a href="chat.html" data-en="AI Assistant" data-ar="المساعد الصحي">AI Assistant</a>
+      <a href="patient.html" data-en="My Profile" data-ar="ملفي الصحي">My Profile</a>
+      <a href="network.html" data-en="Doctors" data-ar="الأطباء">Doctors</a>
+      <a href="hospitals.html" data-en="Hospitals" data-ar="المستشفيات">Hospitals</a>
+    </nav>
+    <button class="lang" type="button">العربية</button>
+    <button class="menu-btn" type="button" aria-label="Menu">≡</button>
+  </div>
+</header>
+
+<main id="main">
+<section style="padding-bottom:1.4rem">
+  <div class="wrap">
+    <p class="eyebrow" data-en="My health profile" data-ar="ملفي الصحي">My health profile</p>
+    <h1 class="display" style="font-size:clamp(1.9rem,4vw,2.8rem)" data-en="Keep your health information in one place" data-ar="احتفظي بمعلوماتك الصحية في مكان واحد">Keep your health information in one place</h1>
+    <p class="lede" style="margin-top:1rem" data-en="Your history, medications, allergies, reports and notes. Everything you add is kept as something you reported, until a healthcare professional confirms it, and you can delete any of it." data-ar="تاريخك وأدويتك وحساسياتك وتقاريرك وملاحظاتك. وكل ما تضيفينه يُحفظ كشيء ذكرتِه أنتِ حتى يؤكده طبيب، ويمكنك حذف أي منه.">Your history, medications, allergies, reports and notes, all in one place.</p>
+  </div>
+</section>
+
+<div class="wrap" style="padding-bottom:3rem">
+  <div class="console">
+    <section>
+      <div class="panel-label" data-en="About you" data-ar="عنك">About you</div>
+      <form id="profile-form" class="grid" style="gap:.9rem">
+        <div>
+          <label class="lbl" for="full_name" data-en="Full name" data-ar="الاسم الكامل">Full name</label>
+          <input class="field" id="full_name" autocomplete="name">
+        </div>
+        <div class="row" style="flex-wrap:nowrap;gap:.9rem">
+          <div style="flex:1"><label class="lbl" for="country" data-en="Country" data-ar="الدولة">Country</label><input class="field" id="country"></div>
+          <div style="flex:1"><label class="lbl" for="city" data-en="City" data-ar="المدينة">City</label><input class="field" id="city"></div>
+        </div>
+        <div class="row" style="flex-wrap:nowrap;gap:.9rem">
+          <div style="flex:1"><label class="lbl" for="date_of_birth" data-en="Date of birth" data-ar="تاريخ الميلاد">Date of birth</label><input class="field" id="date_of_birth" type="date"></div>
+          <div style="flex:1"><label class="lbl" for="preferred_language" data-en="Preferred language" data-ar="اللغة المفضلة">Preferred language</label>
+            <select class="field" id="preferred_language"><option value="en">English</option><option value="ar">العربية</option></select></div>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary" type="submit" data-en="Save" data-ar="حفظ">Save</button>
+          <span id="profile-status" style="font-size:.86rem;color:var(--mist)"></span>
+        </div>
+      </form>
+    </section>
+    <div>
+      <div class="panel-label" data-en="Add to your record" data-ar="أضيفي إلى سجلك">Add to your record</div>
+      <form id="record-form" class="grid" style="gap:.9rem">
+        <div>
+          <label class="lbl" for="record_type" data-en="What is this?" data-ar="ما هذا؟">What is this?</label>
+          <select class="field" id="record_type">
+            <option value="condition" data-en="A health condition" data-ar="حالة صحية">A health condition</option>
+            <option value="medication" data-en="A medication" data-ar="دواء">A medication</option>
+            <option value="allergy" data-en="An allergy" data-ar="حساسية">An allergy</option>
+            <option value="prescription" data-en="A prescription" data-ar="وصفة">A prescription</option>
+            <option value="lab_result" data-en="A test result" data-ar="نتيجة تحليل">A test result</option>
+            <option value="medical_history" data-en="Past medical history" data-ar="تاريخ مرضي سابق">Past medical history</option>
+            <option value="note" data-en="A note" data-ar="ملاحظة">A note</option>
+          </select>
+        </div>
+        <div>
+          <label class="lbl" for="record_title" data-en="Name it" data-ar="سمّيه">Name it</label>
+          <input class="field" id="record_title" data-en="For example: Penicillin" data-ar="مثال: البنسلين" placeholder="For example: Penicillin">
+        </div>
+        <div>
+          <label class="lbl" for="record_content" data-en="Details" data-ar="التفاصيل">Details</label>
+          <textarea class="field" id="record_content" rows="3" data-en="Dose, reaction, date, or anything you'd want a healthcare professional to know" data-ar="الجرعة أو التفاعل أو التاريخ أو أي شيء تودين أن يعرفه الطبيب" placeholder="Dose, reaction, date, or anything you'd want a healthcare professional to know"></textarea>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary" type="submit" data-en="Add" data-ar="إضافة">Add</button>
+          <button class="btn btn-ghost" id="voice-record" type="button" data-en="Say it instead" data-ar="قوليها بصوتك">Say it instead</button>
+          <span id="record-status" style="font-size:.86rem;color:var(--mist)"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="display" style="font-size:1.6rem" data-en="Your records" data-ar="سجلاتك">Your records</h2>
+    <div id="records" style="margin-top:1.2rem"></div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:.8rem">
+        <span class="mark" aria-hidden="true">H</span><span><b>HealTrip</b></span>
+      </a>
+      <p data-en="HealTrip helps you understand your symptoms, prepare for a medical visit, and find appropriate care. It provides health information and navigation support, and does not replace professional medical care." data-ar="يساعدك HealTrip على فهم أعراضك والاستعداد للزيارة الطبية والوصول إلى الرعاية المناسبة. وهو يقدم معلومات صحية ودعمًا في التوجيه، ولا يحل محل الرعاية الطبية المتخصصة.">HealTrip helps you understand your symptoms, prepare for a medical visit, and find appropriate care.</p>
+    </div>
+    <div>
+      <h3 data-en="HealTrip" data-ar="HealTrip">HealTrip</h3>
+      <a href="about.html" data-en="About" data-ar="من نحن">About</a>
+      <a href="how-it-works.html" data-en="How it works" data-ar="كيف يعمل">How it works</a>
+      <a href="how-it-works.html#faq" data-en="Questions" data-ar="أسئلة شائعة">Questions</a>
+    </div>
+    <div>
+      <h3 data-en="Use HealTrip" data-ar="استخدمي HealTrip">Use HealTrip</h3>
+      <a href="assessment.html" data-en="Assessment" data-ar="التقييم الصحي">Assessment</a>
+      <a href="chat.html" data-en="AI Assistant" data-ar="المساعد الصحي">AI Assistant</a>
+      <a href="patient.html" data-en="My Profile" data-ar="ملفي الصحي">My Profile</a>
+    </div>
+    <div>
+      <h3 data-en="Find care" data-ar="البحث عن الرعاية">Find care</h3>
+      <a href="network.html" data-en="Doctors" data-ar="الأطباء">Doctors</a>
+      <a href="hospitals.html" data-en="Hospitals" data-ar="المستشفيات">Hospitals</a>
+      <a href="about.html#privacy" data-en="Your information" data-ar="معلوماتك">Your information</a>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <span data-en="HealTrip does not diagnose, does not prescribe, and does not replace a healthcare professional. What you enter stays in your session or your profile and can be deleted at any time." data-ar="HealTrip لا يشخّص ولا يصف علاجًا ولا يحل محل الطبيب. وما تدخلينه يبقى في جلستك أو ملفك ويمكن حذفه في أي وقت.">HealTrip does not diagnose, does not prescribe, and does not replace a healthcare professional.</span>
+    <a href="technical.html" class="dev-link" data-en="Technical console" data-ar="لوحة المطوّر">Technical console</a>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Technical console — HealTrip</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="config.js"></script>
+<script src="assets/js/client.js" defer></script>
+<script src="assets/js/core.js" defer></script>
+<script src="assets/js/technical.js" defer></script></head>
+<body>
+<a class="skip" href="#main" data-en="Skip to content" data-ar="تخطي إلى المحتوى">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark" aria-hidden="true">H</span>
+      <span><b>HealTrip</b><span data-en="Health navigation" data-ar="دليلك إلى الرعاية">Health navigation</span></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a href="about.html" data-en="About" data-ar="من نحن">About</a>
+      <a href="how-it-works.html" data-en="How it works" data-ar="كيف يعمل">How it works</a>
+      <a href="assessment.html" data-en="Assessment" data-ar="التقييم الصحي">Assessment</a>
+      <a href="chat.html" data-en="AI Assistant" data-ar="المساعد الصحي">AI Assistant</a>
+      <a href="patient.html" data-en="My Profile" data-ar="ملفي الصحي">My Profile</a>
+      <a href="network.html" data-en="Doctors" data-ar="الأطباء">Doctors</a>
+      <a href="hospitals.html" data-en="Hospitals" data-ar="المستشفيات">Hospitals</a>
+    </nav>
+    <button class="lang" type="button">العربية</button>
+    <button class="menu-btn" type="button" aria-label="Menu">≡</button>
+  </div>
+</header>
+
+<main id="main">
+<section style="padding-bottom:1rem">
+  <div class="wrap">
+    <p class="eyebrow">Technical console</p>
+    <h1 class="display" style="font-size:clamp(1.9rem,4vw,2.8rem)">Architecture, agent, tests and sources</h1>
+    <p class="lede" style="margin-top:1rem">Everything an engineer, a reviewer or a clinician would want to inspect, kept out of the patient experience. Numbers come from the suites running live on this server; reload to run them again.</p>
+    <div class="row" style="margin-top:1rem">
+      <span class="chip" id="api-status">…</span>
+      <a class="btn btn-ghost" href="/api/v1/openapi.json" target="_blank" rel="noopener" style="padding:.5rem 1.1rem;font-size:.85rem">OpenAPI document</a>
+      <a class="btn btn-ghost" href="index.html" style="padding:.5rem 1.1rem;font-size:.85rem">Back to the patient site</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section style="padding-top:1rem">
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="panel-label">Request path</div>
+        <pre class="code">patient text or speech
+  -> schema validation (zod)
+  -> safety gate: 15 deterministic rules, concepts + negation scope
+  -> structured patient state
+  -> next-best-question engine
+  -> differential with support / contradiction / missing
+  -> evidence verification: no registered source, no display
+  -> possible evaluations, evidence grounded
+  -> care pathway, specialty, provider search
+  -> FHIR, printable report, audit</pre>
+      </div>
+      <div class="card">
+        <div class="panel-label">Anti-hallucination path</div>
+        <pre class="code">model
+  -> tool name + arguments
+  -> schema validation
+  -> service
+  -> PostgreSQL / knowledge base
+  -> typed result with source and status
+  -> model may quote the result, nothing else
+  -> claim screen over the wording</pre>
+        <p style="margin-top:1rem;font-size:.9rem;color:var(--mist)">The model has no SQL, no credentials and no table access. A request the schema rejects never reaches a service.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="display" style="font-size:1.7rem">Agent tools</h2>
+    <div class="card" id="tools" style="margin-top:1.2rem"></div>
+  </section>
+
+  <section>
+    <h2 class="display" style="font-size:1.7rem">Try the agent</h2>
+    <p style="color:var(--mist)">Calls POST /api/v1/agent/chat and renders the execution trace it returns. Ask for a clinician in a city the directory does not cover and watch it refuse to invent one.</p>
+    <div class="card" style="margin-top:1.2rem">
+      <div class="row" style="flex-wrap:nowrap">
+        <input class="field" id="probe" placeholder="Find me a cardiologist in London">
+        <button class="btn btn-primary" id="probe-send" type="button">Send</button>
+      </div>
+      <div id="probe-out" style="margin-top:1.2rem"></div>
+    </div>
+  </section>
+
+  <section id="eval">
+    <h2 class="display" style="font-size:1.7rem">Measured results</h2>
+    <div class="grid grid-2" style="margin-top:1.2rem">
+      <div class="card"><div class="panel-label">Evaluation suites</div><div id="metrics"><p style="color:var(--mist)">Running…</p></div></div>
+      <div class="card"><div class="panel-label">Knowledge layer</div><div id="knowledge"></div></div>
+    </div>
+  </section>
+
+  <section id="gates">
+    <h2 class="display" style="font-size:1.7rem">Clinical readiness gates</h2>
+    <p style="color:var(--mist)">Technical readiness is not clinical validation. The engineering gates are checked on every run; the rest need clinicians, a lawyer, a regulator and an independent study.</p>
+    <div class="card" id="gatelist" style="margin-top:1.2rem"></div>
+  </section>
+
+  <section>
+    <h2 class="display" style="font-size:1.7rem">Safety rules</h2>
+    <p style="color:var(--mist)">Run on the raw text of every turn, before any reasoning and before any model call.</p>
+    <div class="card" id="flags" style="margin-top:1.2rem"></div>
+  </section>
+
+  <section id="sources">
+    <h2 class="display" style="font-size:1.7rem">Source register</h2>
+    <div class="card" id="sourcelist" style="margin-top:1.2rem"></div>
+  </section>
+
+  <section>
+    <h2 class="display" style="font-size:1.7rem">Endpoints</h2>
+    <div class="card" id="endpoints" style="margin-top:1.2rem"></div>
+  </section>
+
+  <section>
+    <h2 class="display" style="font-size:1.7rem">Candidate explanations</h2>
+    <div class="grid grid-3" id="conditions" style="margin-top:1.2rem"></div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:.8rem">
+        <span class="mark" aria-hidden="true">H</span><span><b>HealTrip</b></span>
+      </a>
+      <p data-en="HealTrip helps you understand your symptoms, prepare for a medical visit, and find appropriate care. It provides health information and navigation support, and does not replace professional medical care." data-ar="يساعدك HealTrip على فهم أعراضك والاستعداد للزيارة الطبية والوصول إلى الرعاية المناسبة. وهو يقدم معلومات صحية ودعمًا في التوجيه، ولا يحل محل الرعاية الطبية المتخصصة.">HealTrip helps you understand your symptoms, prepare for a medical visit, and find appropriate care.</p>
+    </div>
+    <div>
+      <h3 data-en="HealTrip" data-ar="HealTrip">HealTrip</h3>
+      <a href="about.html" data-en="About" data-ar="من نحن">About</a>
+      <a href="how-it-works.html" data-en="How it works" data-ar="كيف يعمل">How it works</a>
+      <a href="how-it-works.html#faq" data-en="Questions" data-ar="أسئلة شائعة">Questions</a>
+    </div>
+    <div>
+      <h3 data-en="Use HealTrip" data-ar="استخدمي HealTrip">Use HealTrip</h3>
+      <a href="assessment.html" data-en="Assessment" data-ar="التقييم الصحي">Assessment</a>
+      <a href="chat.html" data-en="AI Assistant" data-ar="المساعد الصحي">AI Assistant</a>
+      <a href="patient.html" data-en="My Profile" data-ar="ملفي الصحي">My Profile</a>
+    </div>
+    <div>
+      <h3 data-en="Find care" data-ar="البحث عن الرعاية">Find care</h3>
+      <a href="network.html" data-en="Doctors" data-ar="الأطباء">Doctors</a>
+      <a href="hospitals.html" data-en="Hospitals" data-ar="المستشفيات">Hospitals</a>
+      <a href="about.html#privacy" data-en="Your information" data-ar="معلوماتك">Your information</a>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <span data-en="HealTrip does not diagnose, does not prescribe, and does not replace a healthcare professional. What you enter stays in your session or your profile and can be deleted at any time." data-ar="HealTrip لا يشخّص ولا يصف علاجًا ولا يحل محل الطبيب. وما تدخلينه يبقى في جلستك أو ملفك ويمكن حذفه في أي وقت.">HealTrip does not diagnose, does not prescribe, and does not replace a healthcare professional.</span>
+    <a href="technical.html" class="dev-link" data-en="Technical console" data-ar="لوحة المطوّر">Technical console</a>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: healtrip
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-healtrip_local}
+      POSTGRES_DB: healtrip
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./backend/sql:/docker-entrypoint-initdb.d:ro
+      - uploads:/var/lib/healtrip/uploads
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U healtrip -d healtrip"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgres://healtrip:${POSTGRES_PASSWORD:-healtrip_local}@db:5432/healtrip
+      AI_MODE: ${AI_MODE:-demo}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-6}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      MAX_QUESTIONS: ${MAX_QUESTIONS:-8}
+      CORS_ORIGIN: ${CORS_ORIGIN:-*}
+      JWT_SECRET: ${JWT_SECRET:-change-this-in-production}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.6-flash}
+      RATE_LIMIT_PER_MIN: ${RATE_LIMIT_PER_MIN:-180}
+      UPLOAD_DIR: /var/lib/healtrip/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "4000:4000"
+    volumes:
+      - uploads:/var/lib/healtrip/uploads
+
+  web:
+    build: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+
+volumes:
+  dbdata:
+  uploads:

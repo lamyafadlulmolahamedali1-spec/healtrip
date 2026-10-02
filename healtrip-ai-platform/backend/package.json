@@ -1,0 +1,6 @@
+{
+  "name":"healtrip-api","version":"2.0.0","private":true,"description":"HealTrip clinical navigation platform API","main":"src/server.js",
+  "scripts":{"start":"node src/server.js","dev":"node --watch src/server.js","eval":"node src/evaluation.js","readiness":"node src/readiness.js","eval:agent":"node src/agent/evaluation.js","test:db":"node ../scripts/db-smoke.js","test:ui":"node ../scripts/smoke-ui.js","test:security":"node ../scripts/security-tests.js","test:resilience":"node ../scripts/resilience-tests.js","demo":"node ../scripts/demo.js","import:providers":"node src/providers/importer.js","test":"node src/evaluation.js && node src/agent/evaluation.js && node ../scripts/resilience-tests.js","lint":"node --check src/server.js"},
+  "engines":{"node":">=20"},
+  "dependencies":{"cors":"^2.8.5","dotenv":"^16.4.5","express":"^4.19.2","helmet":"^7.1.0","pg":"^8.12.0","zod":"^3.23.8","bcryptjs":"^2.4.3","jsonwebtoken":"^9.0.2","multer":"^2.0.0"}
+}

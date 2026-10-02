@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Assessment — HealTrip</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="config.js"></script>
+<script src="assets/js/client.js" defer></script>
+<script src="assets/js/core.js" defer></script>
+<script src="assets/js/voice.js" defer></script>
+<script src="assets/js/assessment.js" defer></script></head>
+<body>
+<a class="skip" href="#main" data-en="Skip to content" data-ar="تخطي إلى المحتوى">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark" aria-hidden="true">H</span>
+      <span><b>HealTrip</b><span data-en="Health navigation" data-ar="دليلك إلى الرعاية">Health navigation</span></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a href="about.html" data-en="About" data-ar="من نحن">About</a>
+      <a href="how-it-works.html" data-en="How it works" data-ar="كيف يعمل">How it works</a>
+      <a href="assessment.html" data-en="Assessment" data-ar="التقييم الصحي">Assessment</a>
+      <a href="chat.html" data-en="AI Assistant" data-ar="المساعد الصحي">AI Assistant</a>
+      <a href="patient.html" data-en="My Profile" data-ar="ملفي الصحي">My Profile</a>
+      <a href="network.html" data-en="Doctors" data-ar="الأطباء">Doctors</a>
+      <a href="hospitals.html" data-en="Hospitals" data-ar="المستشفيات">Hospitals</a>
+    </nav>
+    <button class="lang" type="button">العربية</button>
+    <button class="menu-btn" type="button" aria-label="Menu">≡</button>
+  </div>
+</header>
+
+<main id="main">
+<section style="padding-bottom:1.4rem">
+  <div class="wrap">
+    <p class="eyebrow" data-en="Health assessment" data-ar="التقييم الصحي">Health assessment</p>
+    <h1 class="display" style="font-size:clamp(1.9rem,4vw,2.8rem)" data-en="Tell us what you're experiencing" data-ar="أخبرينا بما تشعرين به">Tell us what you're experiencing</h1>
+    <p class="lede" style="margin-top:1rem" data-en="Take your time. You can speak or type, in Arabic or English, and each follow-up question is based on what you've already told us." data-ar="خذي وقتك. يمكنك التحدث أو الكتابة، بالعربية أو الإنجليزية، وكل سؤال متابعة يعتمد على ما ذكرتِه بالفعل.">Take your time. You can speak or type, and each follow-up question is based on what you've already told us.</p>
+    <div class="row" style="margin-top:1.2rem">
+      <span class="urgency" id="urgency" data-level="routine" data-en="Getting started" data-ar="البداية">Getting started</span>
+      <span style="font-size:.86rem;color:var(--mist)" id="progress"></span>
+      <button class="lang" type="button" id="voice-toggle" style="margin-inline-start:auto">Voice replies: on</button>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="console" id="console">
+    <section>
+      <div class="panel-label" data-en="Your conversation" data-ar="محادثتك">Your conversation</div>
+      <div id="thread" style="min-height:220px"></div>
+
+      <div id="composer" style="margin-top:1.6rem">
+        <div class="voice-dock">
+          <button class="mic" id="mic" type="button" data-on="false" aria-label="Speak">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+          </button>
+          <div class="voice-state">
+            <span id="voice-state-text" data-en="Tap to talk" data-ar="اضغطي للتحدث">Tap to talk</span>
+            <div id="interim" class="interim"></div>
+          </div>
+          <button class="btn btn-ghost" id="finish-turn" type="button" style="display:none" data-en="I'm finished" data-ar="انتهيت">I'm finished</button>
+        </div>
+
+        <textarea class="field" id="intake" rows="3"
+          data-en="For example: I've had a headache for three days, mostly in the morning"
+          data-ar="مثال: عندي صداع منذ ثلاثة أيام، غالبًا في الصباح"
+          placeholder="For example: I've had a headache for three days, mostly in the morning"></textarea>
+        <div class="row" style="margin-top:.7rem">
+          <button class="btn btn-primary" id="send" type="button" data-en="Send" data-ar="إرسال">Send</button>
+          <span style="font-size:.82rem;color:var(--mist)" id="mic-note"></span>
+        </div>
+      </div>
+    </section>
+
+    <div>
+      <div class="panel-label" id="state-label" data-en="What we've understood so far" data-ar="ما فهمناه حتى الآن">What we've understood so far</div>
+      <div id="state"><p style="color:var(--mist);margin:0" data-en="Nothing yet. Tell us what you're experiencing to begin." data-ar="لا شيء بعد. أخبرينا بما تشعرين به للبدء.">Nothing yet.</p></div>
+
+      <div class="panel-label" id="shortlist-label" style="margin-top:2rem;display:none" data-en="What may be relevant so far" data-ar="ما قد يكون ذا صلة حتى الآن">What may be relevant so far</div>
+      <div id="shortlist"></div>
+
+      <p style="font-size:.84rem;color:var(--mist);margin-top:2rem;border-inline-start:3px solid var(--brass);padding-inline-start:.9rem"
+         data-en="These are possibilities to discuss with a healthcare professional, not a diagnosis."
+         data-ar="هذه احتمالات لمناقشتها مع الطبيب، وليست تشخيصًا.">These are possibilities to discuss with a healthcare professional, not a diagnosis.</p>
+    </div>
+  </div>
+
+  <section id="result" style="padding-block:2.5rem"></section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:.8rem">
+        <span class="mark" aria-hidden="true">H</span><span><b>HealTrip</b></span>
+      </a>
+      <p data-en="HealTrip helps you understand your symptoms, prepare for a medical visit, and find appropriate care. It provides health information and navigation support, and does not replace professional medical care." data-ar="يساعدك HealTrip على فهم أعراضك والاستعداد للزيارة الطبية والوصول إلى الرعاية المناسبة. وهو يقدم معلومات صحية ودعمًا في التوجيه، ولا يحل محل الرعاية الطبية المتخصصة.">HealTrip helps you understand your symptoms, prepare for a medical visit, and find appropriate care.</p>
+    </div>
+    <div>
+      <h3 data-en="HealTrip" data-ar="HealTrip">HealTrip</h3>
+      <a href="about.html" data-en="About" data-ar="من نحن">About</a>
+      <a href="how-it-works.html" data-en="How it works" data-ar="كيف يعمل">How it works</a>
+      <a href="how-it-works.html#faq" data-en="Questions" data-ar="أسئلة شائعة">Questions</a>
+    </div>
+    <div>
+      <h3 data-en="Use HealTrip" data-ar="استخدمي HealTrip">Use HealTrip</h3>
+      <a href="assessment.html" data-en="Assessment" data-ar="التقييم الصحي">Assessment</a>
+      <a href="chat.html" data-en="AI Assistant" data-ar="المساعد الصحي">AI Assistant</a>
+      <a href="patient.html" data-en="My Profile" data-ar="ملفي الصحي">My Profile</a>
+    </div>
+    <div>
+      <h3 data-en="Find care" data-ar="البحث عن الرعاية">Find care</h3>
+      <a href="network.html" data-en="Doctors" data-ar="الأطباء">Doctors</a>
+      <a href="hospitals.html" data-en="Hospitals" data-ar="المستشفيات">Hospitals</a>
+      <a href="about.html#privacy" data-en="Your information" data-ar="معلوماتك">Your information</a>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <span data-en="HealTrip does not diagnose, does not prescribe, and does not replace a healthcare professional. What you enter stays in your session or your profile and can be deleted at any time." data-ar="HealTrip لا يشخّص ولا يصف علاجًا ولا يحل محل الطبيب. وما تدخلينه يبقى في جلستك أو ملفك ويمكن حذفه في أي وقت.">HealTrip does not diagnose, does not prescribe, and does not replace a healthcare professional.</span>
+    <a href="technical.html" class="dev-link" data-en="Technical console" data-ar="لوحة المطوّر">Technical console</a>
+  </div>
+</footer>
+</body>
+</html>

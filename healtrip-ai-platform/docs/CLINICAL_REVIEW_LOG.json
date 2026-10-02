@@ -1,0 +1,11 @@
+{
+  "purpose": "Register of clinician sign-off for every entry in the clinical knowledge base. The readiness gate reads this file and stays open until the number of approved entries matches the number of entries in knowledge.js.",
+  "rules": [
+    "A reviewer must be a licensed clinician in the relevant specialty.",
+    "Each review records the reviewer, their licence number, the authority, the date and the knowledge-base version reviewed.",
+    "A change to an entry resets its status to pending.",
+    "status may be: pending, approved, rejected"
+  ],
+  "knowledge_version": "1.0.0",
+  "reviews": []
+}
